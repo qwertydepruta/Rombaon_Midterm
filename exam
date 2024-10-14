@@ -1,0 +1,101 @@
+// Base class representing a person with common attributes
+class Person { 
+    private String name;
+    private int age;
+
+    // Constructor to initialize the name and age of the person
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Method to display basic information about the person
+    public void displayInfo() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+
+    // Getter methods for name and age
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+// Student class that extends Person and adds student-specific attributes
+class Student extends Person {
+    private String studentID;
+    private String course;
+    private int units;
+    private static final int FEE_PER_UNIT = 1000; // Constant fee per unit
+
+    // Constructor to initialize student details, including those from Person
+    public Student(String name, int age, String studentID, String course, int units) {
+        super(name, age); // Call to parent class constructor
+        this.studentID = studentID;
+        this.course = course;
+        this.units = units;
+    }
+
+    // Private method to calculate the total fees based on the number of units
+    private double calculateFees() {
+        return units * FEE_PER_UNIT;
+    }
+
+    // Overridden method to display student-specific information, including fees
+    @Override
+    public void displayInfo() {
+        System.out.println("Student Name: " + getName() + ", Age: " + getAge() + 
+                           ", Student ID: " + studentID + ", Course: " + course + 
+                           ", Units: " + units + ", Total Fee: " + calculateFees());
+    }
+}
+
+// Instructor class that extends Person and adds instructor-specific attributes
+class Instructor extends Person {
+    private String employeeID;
+    private String department;
+    private double salary;
+
+    // Constructor to initialize instructor details, including those from Person
+    public Instructor(String name, int age, String employeeID, String department, double salary) {
+        super(name, age); // Call to parent class constructor
+        this.employeeID = employeeID;
+        this.department = department;
+        this.salary = salary;
+    }
+
+    // Overridden method to display instructor-specific information, including salary
+    @Override
+    public void displayInfo() {
+        System.out.println("Instructor Name: " + getName() + ", Age: " + getAge() + 
+                           ", Employee ID: " + employeeID + ", Department: " + department + 
+                           ", Salary: " + salary);
+    }
+}
+
+// Main class to simulate an enrollment system
+public class EnrollmentSystem {
+
+    // Static method to print the details of a given person (either student or instructor)
+    private static void printDetails(Person person) {
+        person.displayInfo(); // Calls the displayInfo method of the specific class (Student or Instructor)
+    }
+
+    // Main method - entry point of the program
+    public static void main(String[] args) {
+        // Creating Student and Instructor objects with relevant details
+        Student student1 = new Student("Angelo Pogi", 20, "231001729", "Nursing", 6);
+        Student student2 = new Student("Joseph Barniga", 72, "231000322", "Araling Panlipunan", 8);
+        Instructor instructor1 = new Instructor("Engr. Tanya Jovillano", 22, "C102", "Differential Equations", 10000000);
+        Instructor instructor2 = new Instructor("Engr. Gela Caning", 32, "", "Mother Tongue", 2400);
+
+        // Displaying details of each person using the printDetails method
+        printDetails(student1);
+        printDetails(student2);
+        printDetails(instructor1);
+        printDetails(instructor2);
+    }
+}
